@@ -4,6 +4,8 @@ import torch
 
 import numpy as np
 import matplotlib.pyplot as plt
+from collections import OrderedDict
+
 
 from PIL import Image
 from sklearn.metrics import roc_auc_score, auc, roc_curve
@@ -121,6 +123,32 @@ def load_old_weights(net, path):
     except:
         print('issue with weight names, needs manual fix')
         
+
+def gen_state_dict(model_path):
+    state_dict = torch.load(model_path)
+    
+    n_prefix = 0
+    first_key = list(state_dict.keys())[0]
+    words = first_key.split('.')
+    for w in words:
+        if w == 'module':
+            n_prefix += 1
+            
+    if n_prefix == 0:
+        new_state_dict = OrderedDict()
+        for k,v in state_dict.items():
+            new_state_dict['module.' + k] = state_dict[k]
+        return new_state_dict        
+
+    elif n_prefix > 1:
+        new_state_dict = OrderedDict()
+        for k,v in state_dict.items():
+            new_k = k[7 * n_prefix:]
+            new_state_dict[new_k] = state_dict[k]
+        return new_state_dict 
+    
+    else:
+        return state_dict
         
 ## source: https://gist.github.com/the-bass/cae9f3976866776dea17a5049013258d
 def hard_binary_accuracy(batch, labels):
@@ -233,13 +261,14 @@ def display_roc_curve(loader, model, dis_map, batch_size):
 
     for imgs, labs in loader:
         p = model(imgs)
-        p = p.detach().cpu().numpy().reshape(len(dis_map.keys()) * p.shape[0],)
-        labs = labs.detach().cpu().numpy().reshape(len(dis_map.keys()) * labs.shape[0],)
-
-
-        for name, idx in dis_map.items():
-            preds[name] = np.append(preds.get(name, np.array([])), p[idx])
-            labels[name] = np.append(labels.get(name, np.array([])), labs[idx])
+        
+        p = p.detach().cpu().numpy()
+        labs = labs.detach().cpu().numpy()
+        
+        for pi, li in zip(p, labs):
+            for name, idx in dis_map.items():
+                preds[name] = np.append(preds.get(name, np.array([])), pi[idx])
+                labels[name] = np.append(labels.get(name, np.array([])), li[idx])
     
     plt.figure()
     plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
