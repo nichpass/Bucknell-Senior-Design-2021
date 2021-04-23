@@ -6,10 +6,9 @@ BBOX_AVG_SIZE = {
  'Atelectasis': 33508.51688697086
 }
 
-BEST_THRESHOLD = {
- 'Cardiomegaly': 0.5,
- 'Effusion': 0.5,
- 'Mass': 0.5,
- 'Nodule': 0.5,
- 'Atelectasis': 0.5
-}
+BEST_THRESHOLD = {'Cardiomegaly': 0.23546557128429413,
+ 'Effusion': 0.23394592106342316,
+ 'Mass': 0.5300890207290649,
+ 'Nodule': 0.16681720316410065,
+ 'Atelectasis': 0.14686164259910583}
+ #'No Finding': 0.09936013072729111}
