@@ -20,7 +20,7 @@ Congratulations! You have successfully connected to a Jupyter notebook and are r
 
 ### Generating the Model<a name="generation"></a>
 
-Notebook: [Generation](./transfer_classifier_resnet_multi.ipynb)
+Notebook: [Generation](./src/training_testing/multi_label_classifier_clean.ipynb)
 
 The generation notebook will outline the required steps to create the multi-label classifier model. The same points are echoed below.
 
@@ -38,20 +38,20 @@ Step 1 involves changing the second cell's variable values, and steps 2-4 can be
 ---
 
 ### Executing the project
-Notebook: [Release](./alpha_release.ipynb) <a name="execution"></a>
+Notebook: [Release](./src/beta_release.ipynb) <a name="execution"></a>
 
-Running the model is quite straightforward; the command `python alpha_release.py` will execute the classification script, allowing you to enter an image location. It will then classify the image according to which diseases are present and produce images with bounding boxes for applicable diseases. 
+Running the model is quite straightforward; the command `python beta_release.py` will execute the classification script, allowing you to enter an image location. It will then classify the image according to which diseases are present and produce images with bounding boxes for applicable diseases. 
 
 (_Note: This section will be updated with a new script name for the final release._)
 
 ---
 
 ### Expected Results
-Notebook: [Evaluation](./multi_label_class_roc.ipynb)
+Notebook: [Evaluation](./src/training_testing/multi_label_class_roc.ipynb)
 
 
 
-![Graph of the ROC curves](auroc.png)
+![Graph of the ROC curves](./visualizations/auroc_multi.png)
 
 (_Note: This section will be updated with updated images and a table comparing results to the original paper for the final release._)
 
@@ -59,4 +59,4 @@ Notebook: [Evaluation](./multi_label_class_roc.ipynb)
 
 ### Acknowledgements
 The original dataset for our project can be found [here](https://www.kaggle.com/nih-chest-xrays/data).
-This project was made by Andrew Dresser, Josh Dunbrack, Mitch Gavars, and Nick Passantino, and would not have been possible without the support of our professor and client Joshua Stough.
+This project was made by Andrew Dresser, Josh Dunbrack, Mitch Gavars, and Nicholas Passantino, and would not have been possible without the support of our professor and client Joshua Stough.
