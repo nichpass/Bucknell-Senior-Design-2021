@@ -23,6 +23,8 @@ disease_map = {"Atelectasis" : 0, "Consolidation" : 1, "Infiltration" : 2, "Pneu
 
 dis_small_map = {'Cardiomegaly': 0, 'Effusion': 1, 'Mass': 2, 'Nodule': 3, 'Atelectasis': 4, 'No Finding': 5}
 
+dis_bb_map = {'Cardiomegaly': 0, 'Effusion': 1, 'Mass': 2, 'Nodule': 3,
+                 'Atelectasis': 4, 'Infiltration': 5, 'Pneumonia' : 6, 'Pneumothorax' : 7, 'No Finding': 8}
 
 class GetLoader(torch.utils.data.Dataset):
     '''
@@ -38,7 +40,7 @@ class GetLoader(torch.utils.data.Dataset):
     def __init__(self, data, view, diseases, num_imgs, factor, typ, transforms=None):
         
         #private data
-        self.root = os.path.join('data/sorted_images',)
+        self.root = os.path.join('/bn-hpc/data/DeepMedIA/data/sorted_images')
         self.data = data # dict object
         self.transforms = transforms
         self.len_data = 0
@@ -85,10 +87,10 @@ class GetLoader(torch.utils.data.Dataset):
                 data['img_path'] = os.path.join(self.root, data['classes'][0], view, data['img_name'])            
                 diseases_item = data['classes']
 
-                one_hot = np.zeros(6)
+                one_hot = np.zeros(9)
                 for d in diseases_item:
                     if d in diseases:
-                        hot_index = dis_small_map[d]
+                        hot_index = dis_bb_map[d]
                         one_hot[hot_index] = 1
 
                 self.img_paths.append(data['img_path'])
@@ -279,15 +281,22 @@ def display_roc_curve(loader, model, dis_map, batch_size):
     plt.figure()
     plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
 
+    
+    best_thresholds = {}
+    
     for name in dis_map: #preds.keys():
-
         y_test = labels[name]
         y_score = preds[name]
 
         fpr, tpr, thresholds = roc_curve(y_test, y_score, pos_label=1)
         roc_auc = auc(fpr, tpr)
+        
+        best_id = np.argmax(tpr - fpr)
+        #print('best vals:', np.max(tpr - fpr))
+        best_thresholds[name] = thresholds[best_id]
 
         plt.plot(fpr, tpr, lw=1, label= name + ' ROC curve (area = %0.2f)' % roc_auc)
+        
 
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.0])
@@ -299,3 +308,8 @@ def display_roc_curve(loader, model, dis_map, batch_size):
     
     del preds
     del labels
+    
+    #print('best thresholds:')
+    #print(best_thresholds)
+    
+
