@@ -1,0 +1,3 @@
+## Development and Testing Folder
+
+Because of the amount of testing, experimenting, and research that this project requires, we have many notebooks that were used to experiment with different techniques. Many of these are outdated, but have been useful as reference points for the up to date code that is used in the beta release file. Files and code here may have portions taken and used elsewhere in the project, or they may no longer be needed. Either way we like to keep a reference to our previous trials.
