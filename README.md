@@ -1,4 +1,4 @@
-(this file is an updated version of `user_manual_draft.md`, renamed to the readme file so that it displays properly)
+(this file is an updated version of `user_manual_draft.md` , which was renamed to to properly as a README.md file)
 
 # Deep MedIA Senior Design User Manual
 
@@ -24,7 +24,7 @@ Congratulations! You have successfully connected to a Jupyter notebook and are r
 
 Notebook: [Generation](./src/training_testing/multi_label_classifier_clean.ipynb)
 
-The generation notebook will outline the required steps to create the multi-label classifier model. The same points are echoed below.
+The generation notebook can be executed in full to generate a new model. The steps below will all be completed automatically
 
 #### Prerequisites:
 You have the "Generation" notebook open in Jupyter with the `deeplearn` Python module active.
@@ -40,7 +40,7 @@ Step 1 involves changing the second cell's variable values, and steps 2-4 can be
 ---
 
 ### Executing the project
-Notebook: [Release](./src/beta_release.ipynb) <a name="execution"></a>
+Notebook: [Release](./src/beta_release.py) <a name="execution"></a>
 
 Running the model is quite straightforward; the command `python beta_release.py` will execute the classification script, allowing you to enter an image location. It will then classify the image according to which diseases are present and produce images with bounding boxes for applicable diseases. 
 
@@ -58,6 +58,14 @@ Notebook: [Evaluation](./src/training_testing/multi_label_class_roc.ipynb)
 (_Note: This section will be updated with updated images and a table comparing results to the original paper for the final release._)
 
 ---
+
+
+### Other folders within the file
+
+1. `src/training_testing` - this folder contains the files used for generating new models and examining the results
+2. `src/util` - contains many python functions and constants used in the other notebooks throughout the project
+3. `src/dev_testing_notebooks` - old notebooks that are either outdated or were used solely for experimentation
+4. `src/saved_models` - the model files used to load in our trained models
 
 ### Acknowledgements
 The original dataset for our project can be found [here](https://www.kaggle.com/nih-chest-xrays/data).
