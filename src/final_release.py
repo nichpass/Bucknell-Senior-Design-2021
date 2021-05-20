@@ -104,15 +104,7 @@ for d in has_disease_dict.keys():
 
 # In[11]:
 
-print('1')
 
-
-print(1.1)
-
-
-
-# In[12]:
-print('dc')
 from util.DetectorConfig import DetectorConfig
 
 
@@ -124,15 +116,11 @@ from util.DetectorConfig import DetectorConfig
 
 # In[14]:
 
-print('2')
 
 #from mrcnn.config import Config
 #from mrcnn import utils
 
 #from mrcnn.model import log
-
-
-print('3')
 
 # In[15]:
 
