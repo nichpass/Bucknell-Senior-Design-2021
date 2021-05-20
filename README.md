@@ -56,6 +56,7 @@ Notebook: [Evaluation](./src/training_testing/multi_label_class_roc.ipynb)
 ![Graph of the ROC curves](./visualizations/auroc_multi.png)
 
 ![Bounding Box Result Example](./src/mrcnn_out_img/mrcnn_out_test_img1.png)
+
 ---
 
 
