@@ -1,4 +1,4 @@
-(this file is an updated version of `user_manual_draft.md` , which was renamed to to properly as a README.md file)
+(this file is an updated version of `user_manual_draft.md` , which was renamed to properly display as a Readme file on GitLab)
 
 # Deep MedIA Senior Design User Manual
 
@@ -24,7 +24,7 @@ Congratulations! You have successfully connected to a Jupyter notebook and are r
 
 Notebook: [Generation](./src/training_testing/multi_label_classifier_clean.ipynb)
 
-The generation notebook can be executed in full to generate a new model. The steps below will all be completed automatically
+The generation notebook can be executed in full to generate a new model. The steps below will all be completed automatically, but it is recommended that you change the name of the model to be saved so that it does not overwrite any of the existing models.
 
 #### Prerequisites:
 You have the "Generation" notebook open in Jupyter with the `deeplearn` Python module active.
@@ -40,9 +40,9 @@ Step 1 involves changing the second cell's variable values, and steps 2-4 can be
 ---
 
 ### Executing the project
-Notebook: [Release](./src/beta_release.py) <a name="execution"></a>
+Notebook: [Release](./src/final_release.py) <a name="execution"></a>
 
-Running the model is quite straightforward; the command `python beta_release.py` will execute the classification script, allowing you to enter an image location. It will then classify the image according to which diseases are present and produce images with bounding boxes for applicable diseases. 
+Running the model is quite straightforward; the command `python final_release.py` will execute the classification script, allowing you to enter an image location. It will then classify the image according to which diseases are present and produce and produce a bounding box image via Mask R-CNN. The classification results will display to the console, while the bounding box image will be saved to `src/mrcnn_out_img`
 
 (_Note: This section will be updated with a new script name for the final release._)
 
@@ -55,8 +55,7 @@ Notebook: [Evaluation](./src/training_testing/multi_label_class_roc.ipynb)
 
 ![Graph of the ROC curves](./visualizations/auroc_multi.png)
 
-(_Note: This section will be updated with updated images and a table comparing results to the original paper for the final release._)
-
+![Bounding Box Result Example](./src/mrcnn_out_img/mrcnn_out_test_img1.png)
 ---
 
 
