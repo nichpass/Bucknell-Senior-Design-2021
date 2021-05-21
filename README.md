@@ -11,6 +11,7 @@ To run one of our Jupyter notebooks, perform the following steps.
 
 1. Access the ACET machines directly or through SSH (e.g. `ssh acet116-lnx-21.bucknell.edu`)
 2. Run the command `module switch python/3.7-deeplearn` to load in all needed libraries and packages
+3. Navigate to `src` folder and execute `./maskrcnn_setup.sh` to install (or more likely just downgrade) versions of tensorflow, keras, and many other modules that have specific version requirements to run Mask R-CNN
 3. Navigate to `/bn-hpc/data/DeepMedIA`
 4. Run a Jupyter instance. I use the command `jupyter lab --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password='' --FileCheckpoints.checkpoint_dir='/home/abc123/jup-checkpoints/`, with `abc123` replaced with my Bucknell user ID. This will require a `jup-checkpoints` directory in your user home folder to already exist - if it doesn't, create it. The custom checkpoint directory a requirement 
 5. (_Optional_) Disown the Jupyter process to avoid shutdown on terminal exit/disconnect. Find the process ID (the command `ps aux | grep /home/abc123/jup-checkpoints` should isolate it) and then run `disown [PID]`. This will allow you to connect remotely to the Jupyter notebook later without repeating any of the prior steps, as long as the computer isn't shut down.
@@ -44,16 +45,18 @@ Notebook: [Release](./src/final_release.py) <a name="execution"></a>
 
 Running the model is quite straightforward; the command `python final_release.py` will execute the classification script, allowing you to enter an image location. It will then classify the image according to which diseases are present and produce and produce a bounding box image via Mask R-CNN. The classification results will display to the console, while the bounding box image will be saved to `src/mrcnn_out_img`
 
-(_Note: This section will be updated with a new script name for the final release._)
-
 ---
 
 ### Expected Results
 Notebook: [Evaluation](./src/training_testing/multi_label_class_roc.ipynb)
 
 
+Below details an expected set of ROC curve results if our model were to be tested:
 
 ![Graph of the ROC curves](./visualizations/auroc_multi.png)
+
+
+The below image shows a bounding box image generated via Mask R-CNN. This model cannot determine which disease in particular it has found, but it can find diseases to a high degree of accuracy, as is noted in each of our final reports. By using the classification results in tandem with the determined bounding boxes, useful inference can be made.
 
 ![Bounding Box Result Example](./src/mrcnn_out_img/mrcnn_out_test_img1.png)
 
@@ -66,6 +69,9 @@ Notebook: [Evaluation](./src/training_testing/multi_label_class_roc.ipynb)
 2. `src/util` - contains many python functions and constants used in the other notebooks throughout the project
 3. `src/dev_testing_notebooks` - old notebooks that are either outdated or were used solely for experimentation
 4. `src/saved_models` - the model files used to load in our trained models
+5. `src/mrcnn` - modules necessary for Mask R-CNN to run
+6. `src/util` - general utility modules that provide functionality for the models
+6. `src/test_imgs` - a few images that can be used for easy / quick testing
 
 ### Acknowledgements
 The original dataset for our project can be found [here](https://www.kaggle.com/nih-chest-xrays/data).
